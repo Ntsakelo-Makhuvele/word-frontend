@@ -5,13 +5,12 @@ const Home = () => {
     const [result, setResult] = useState<string[] | null>(null);
     const [input, setInput] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(true);
+    
 
     const endPoint = 'https://sort-node.vercel.app/api/v1/sort';
     
     const onSubmit = async() => {
         setError('');
-        setLoading(true);
         setResult([]);
        if(input){
            axios({
@@ -24,14 +23,13 @@ const Home = () => {
                 data:input.toLowerCase()
             }
            }).then(result => {
-            setLoading(false);
+            
             if(result.status ===200){
                 setResult(result.data.word)
             }else{
                 setError('Could not retrieve the data')
             }
            }).catch(err => {
-            false
             if(err){
                 setError('Something went wrong')
             }
